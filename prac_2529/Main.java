@@ -41,14 +41,13 @@ public class Main {
 	}
 
 	public static boolean chk(String str) {
-		for (int i = 1; i < str.length(); i++) {
-			int j = i - 1;
-			if (compare[j].equals(">")) {
-				if ((str.charAt(i - 1) - '0') < (str.charAt(i) - '0')) {
+		for (int i = 0; i < k; i++) {
+			if (compare[i].equals(">")) {
+				if ((str.charAt(i) - '0') < (str.charAt(i+1) - '0')) {
 					return false;
 				}
-			} else if (compare[j].equals("<")) {
-				if ((str.charAt(i - 1) - '0') > (str.charAt(i) - '0')) {
+			} else if (compare[i].equals("<")) {
+				if ((str.charAt(i) - '0') > (str.charAt(i+1) - '0')) {
 					return false;
 				}
 			}
