@@ -28,7 +28,7 @@ public class Main {
 			op[i] = Integer.parseInt(str[i]);
 		}
 
-		dfs(1, num.get(0));
+		dfs(1, num.get(0)); // ´ÙÀ½ idx, result
 		System.out.println(max);
 		System.out.println(min);
 
