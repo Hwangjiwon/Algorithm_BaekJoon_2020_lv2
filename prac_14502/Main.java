@@ -22,7 +22,7 @@ public class Main {
 	static int[][] map, copy;
 	static boolean[][] visited;
 	static List<Dot> virus = new LinkedList<Main.Dot>();
-	static int safeCnt, result, cnt;
+	static int safeCnt, result;
 	static int[] dx = { 0, 0, -1, 1 };
 	static int[] dy = { -1, 1, 0, 0 };
 
@@ -43,14 +43,11 @@ public class Main {
 				copy[i][j] = map[i][j];
 				if (map[i][j] == 2)
 					virus.add(new Dot(i, j));
-				else if (map[i][j] == 0)
-					safeCnt++;
-
 			}
 		}
 		result = 0;
-		wall(cnt);
-		System.out.println(result - 3);
+		wall(0);
+		System.out.println(safeCnt);
 
 		br.close();
 	}
@@ -59,9 +56,16 @@ public class Main {
 		if (cnt == 3) {
 
 			worm();
+			for (int i = 0; i < N; i++) {
+				for (int j = 0; j < M; j++) {
+					if (copy[i][j] == 0)
+						result++;
+				}
+			}
+			safeCnt = Math.max(safeCnt, result);
 
 			cnt = 0;
-
+			result = 0;
 			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < M; j++) {
 					copy[i][j] = map[i][j];
@@ -73,7 +77,7 @@ public class Main {
 
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < M; j++) {
-				if (map[i][j] == 0) {
+				if (copy[i][j] == 0) {
 					map[i][j] = 1;
 					copy[i][j] = 1;
 					wall(cnt + 1);
@@ -86,7 +90,6 @@ public class Main {
 
 	public static void worm() {
 		Queue<Dot> q = new LinkedList<>();
-		int safe = safeCnt;
 		for (int i = 0; i < virus.size(); i++) {
 			q.add(new Dot(virus.get(i).y, virus.get(i).x));
 			visited[virus.get(i).y][virus.get(i).x] = true;
@@ -103,24 +106,12 @@ public class Main {
 						if (copy[ny][nx] == 0) {
 							visited[ny][nx] = true;
 							copy[ny][nx] = 2;
-							System.out.println("***");
-							q.add(new Dot(pos.x + dx[i], pos.y + dy[i]));
-							safe--;
+							q.add(new Dot(ny, nx));
 							visited[ny][nx] = false;
 						}
 					}
 				}
 			}
-
 		}
-
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < M; j++) {
-				System.out.print(copy[i][j]);
-			}
-			System.out.println();
-		}
-		System.out.println();
-		result = Math.max(result, safe);
 	}
 }
