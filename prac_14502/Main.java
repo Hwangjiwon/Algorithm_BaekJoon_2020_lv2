@@ -22,7 +22,7 @@ public class Main {
 	static int[][] map, copy;
 	static boolean[][] visited;
 	static List<Dot> virus = new LinkedList<Main.Dot>();
-	static int safeCnt, result;
+	static int safeCnt, result, cnt;
 	static int[] dx = { 0, 0, -1, 1 };
 	static int[] dy = { -1, 1, 0, 0 };
 
@@ -49,8 +49,8 @@ public class Main {
 			}
 		}
 		result = 0;
-		wall(0);
-		System.out.println(result-3);
+		wall(cnt);
+		System.out.println(result - 3);
 
 		br.close();
 	}
@@ -102,14 +102,25 @@ public class Main {
 					if (!visited[ny][nx]) {
 						if (copy[ny][nx] == 0) {
 							visited[ny][nx] = true;
+							copy[ny][nx] = 2;
+							System.out.println("***");
 							q.add(new Dot(pos.x + dx[i], pos.y + dy[i]));
 							safe--;
-							//visited[ny][nx] = false;
+							visited[ny][nx] = false;
 						}
 					}
 				}
 			}
+
 		}
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
+				System.out.print(copy[i][j]);
+			}
+			System.out.println();
+		}
+		System.out.println();
 		result = Math.max(result, safe);
 	}
 }
