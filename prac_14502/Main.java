@@ -56,6 +56,7 @@ public class Main {
 		if (cnt == 3) {
 
 			worm();
+			//빈공간 개수
 			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < M; j++) {
 					if (copy[i][j] == 0)
@@ -64,6 +65,7 @@ public class Main {
 			}
 			safeCnt = Math.max(safeCnt, result);
 
+			//초기화
 			cnt = 0;
 			result = 0;
 			for (int i = 0; i < N; i++) {
