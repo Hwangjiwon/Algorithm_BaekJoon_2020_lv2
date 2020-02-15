@@ -67,7 +67,7 @@ public class Main {
 
 				if (map[ny][nx] == 1) { // ∫Æ¿Ã∏È
 					if (drill + 1 <= K) {
-						if (!visited[drill][ny][nx]) {
+						if (!visited[drill + 1][ny][nx]) {
 							visited[drill + 1][ny][nx] = true;
 							q.add(new Dot(drill + 1, ny, nx, cnt + 1));
 						}
