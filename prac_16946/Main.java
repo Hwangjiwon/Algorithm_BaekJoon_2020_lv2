@@ -66,7 +66,6 @@ public class Main {
 					cnt++;
 					q.add(new Dot(ny, nx, cnt, drill + 1));
 					result[py][px] = cnt;
-					visited[ny][nx] = false;
 				}
 
 			}
