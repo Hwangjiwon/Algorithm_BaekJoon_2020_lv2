@@ -20,7 +20,7 @@ public class Main {
 			num[i] = (int) tmp[0].charAt(i) - '0';
 		}
 		B = Integer.parseInt(tmp[1]);
-		C = Integer.MIN_VALUE;
+		C = -1;
 		sol(0, "");
 
 		System.out.println(C);
@@ -32,12 +32,13 @@ public class Main {
 			int result = Integer.parseInt(str);
 			if (result <= B) {
 				C = Math.max(C, result);
-			} else
-				C = -1;
+			}
 			return;
 		}
 
 		for (int i = size - 1; i >= 0; i--) {
+			if (len == 0 && num[i] == 0) //첫번째가 0이면 안됨
+				continue;
 			if (!visited[i]) {
 				visited[i] = true;
 				sol(len + 1, str + num[i] + "");
