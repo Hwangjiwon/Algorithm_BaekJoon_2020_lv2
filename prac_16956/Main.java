@@ -18,6 +18,7 @@ class Dot {
 public class Main {
 	static int R, C;
 	static String[][] map;
+	static Queue<Dot> sheep;
 	static Queue<Dot> wolf;
 	static int[] dx = { 0, 0, -1, 1 };
 	static int[] dy = { -1, 1, 0, 0 };
@@ -31,25 +32,28 @@ public class Main {
 		C = Integer.parseInt(input[1]); // x
 
 		map = new String[R][C];
+		sheep = new LinkedList<>();
 		wolf = new LinkedList<>();
 
 		for (int i = 0; i < R; i++) {
 			input = br.readLine().split("");
 			for (int j = 0; j < C; j++) {
 				map[i][j] = input[j];
-				if (map[i][j].equals("W")) {
+				if (map[i][j].equals("S")) {
+					sheep.add(new Dot(i, j));
+				} else if (map[i][j].equals("W")) {
 					wolf.add(new Dot(i, j));
 				}
 			}
 		}
-
+		
 		sol();
 
 		br.close();
 	}
 
 	public static void sol() {
-		if (wolf.size() == 0) {
+		if (wolf.size() == 0 || sheep.size() == 0) {
 			result = 1;
 			for (int i = 0; i < R; i++) {
 				int flag = 0;
@@ -76,13 +80,14 @@ public class Main {
 				int nx = x + dx[i];
 				int ny = y + dy[i];
 
-				if (nx >= 0 && ny >= 0 && ny < R && nx < C) {
-					if (map[ny][nx].equals(".")) {
-						map[ny][nx] = "D";
-						result = 1;
-					} else if (map[ny][nx].equals("S")) {
-						result = 0;
-					}
+				if (nx < 0 || ny < 0 || ny >= R || nx >= C)
+					continue;
+
+				if (map[ny][nx].equals(".")) {
+					map[ny][nx] = "D";
+					result = 1;
+				} else if (map[ny][nx].equals("S")) {
+					result = 0;
 				}
 			}
 
@@ -94,7 +99,6 @@ public class Main {
 		System.out.println(result);
 		if (result == 0)
 			return;
-		
 		for (int i = 0; i < R; i++) {
 			for (int j = 0; j < C; j++) {
 				System.out.print(map[i][j]);
