@@ -13,9 +13,20 @@ public class Main {
 		String[] str = br.readLine().split(" ");
 		N = Integer.parseInt(str[0]);
 		M = Integer.parseInt(str[1]);
-		
-		
+
+		dfs(0, 1, "");
+
 		br.close();
 	}
 
+	public static void dfs(int len, int idx, String str) {
+		if (len == 3) {
+			System.out.println(str);
+			return;
+		}
+
+		for (int i = idx; i <= N; i++) {
+			dfs(len + 1, i + 1, str + i + " ");
+		}
+	}
 }
