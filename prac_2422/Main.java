@@ -17,6 +17,7 @@ class Disable {
 public class Main {
 	static int N, M;
 	static ArrayList<Disable> list = new ArrayList<>();
+	static int cnt;
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
@@ -30,16 +31,14 @@ public class Main {
 			list.add(new Disable(Integer.parseInt(str[0]), Integer.parseInt(str[1])));
 		}
 		dfs(0, 1, "");
-
+		System.out.println(cnt);
 		br.close();
 	}
 
 	public static void dfs(int len, int idx, String str) {
 		if (len == 3) {
-			System.out.println(str);
-			if (chk(str)) {
-
-			}
+			cnt++;
+			chk(str);
 			return;
 		}
 
@@ -48,19 +47,18 @@ public class Main {
 		}
 	}
 
-	public static boolean chk(String str) {
+	public static void chk(String str) {
 		String[] tmp = str.split(" ");
-		boolean[] visited = new boolean[tmp.length + 1];
+		boolean[] visited = new boolean[200];
 
 		for (int i = 0; i < tmp.length; i++)
 			visited[Integer.parseInt(tmp[i])] = true;
 
 		for (int i = 0; i < M; i++) {
-			System.out.println(list.get(i).x + " " + list.get(i).y);
 			if (visited[list.get(i).x] && visited[list.get(i).y]) {
-				System.out.println("&&&");
+				cnt--;
+				break;
 			}
 		}
-		return true;
 	}
 }
