@@ -16,7 +16,7 @@ class Disable {
 
 public class Main {
 	static int N, M;
-	static ArrayList<Disable> list = new ArrayList<>();
+	static ArrayList<Disable> list;
 	static int cnt;
 
 	public static void main(String[] args) throws IOException {
@@ -25,7 +25,8 @@ public class Main {
 		String[] str = br.readLine().split(" ");
 		N = Integer.parseInt(str[0]);
 		M = Integer.parseInt(str[1]);
-
+		
+		list = new ArrayList<>();
 		for (int i = 0; i < M; i++) {
 			str = br.readLine().split(" ");
 			list.add(new Disable(Integer.parseInt(str[0]), Integer.parseInt(str[1])));
@@ -49,7 +50,7 @@ public class Main {
 
 	public static void chk(String str) {
 		String[] tmp = str.split(" ");
-		boolean[] visited = new boolean[tmp.length];
+		boolean[] visited = new boolean[str.length() + 1];
 
 		for (int i = 0; i < tmp.length; i++)
 			visited[Integer.parseInt(tmp[i])] = true;
