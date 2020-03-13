@@ -49,7 +49,7 @@ public class Main {
 
 	public static void chk(String str) {
 		String[] tmp = str.split(" ");
-		boolean[] visited = new boolean[200];
+		boolean[] visited = new boolean[tmp.length];
 
 		for (int i = 0; i < tmp.length; i++)
 			visited[Integer.parseInt(tmp[i])] = true;
