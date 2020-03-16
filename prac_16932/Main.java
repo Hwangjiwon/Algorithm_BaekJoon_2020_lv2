@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 public class Main {
 	static int N, M;
 	static int[][] map;
+	static boolean[][] visited;
 	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
